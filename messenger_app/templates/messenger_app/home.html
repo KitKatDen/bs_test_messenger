@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Страница с чатами:: {{ block.super }}
+{% endblock %}
+
+{% block content %}
+
+{% if request.user.is_authenticated %}
+  <h1>Страница с чатами</h1>
+<h3>Здесь находится поиск собеседника и перечислены все чаты пользователя:</h3>
+
+<form action="{% url 'view_chat' %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Поиск</button>
+</form>
+
+            {% if messages %}
+
+            {% for message in messages %}
+
+                {% if message.tags == 'error' %}
+                   <br><span style='color:red'> {{ message }} </span>
+                {% endif %}
+
+            {% endfor %}
+
+            {% endif %}
+
+{% for chat in chats %}
+
+<br><a href="{{ chat.get_absolute_url }}">{{ chat.title }}</a><br>
+{% endfor %}
+
+{% else %}
+  Авторизуйтесь, чтобы видеть содержание страницы.
+{% endif %}
+
+{% endblock %}

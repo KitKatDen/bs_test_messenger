@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Yandex.Metrika counter -->
+<script type="text/javascript" >
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(70611349, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true
+   });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/70611349" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+    {% if request.user.is_authenticated %}
+        <div align="left">Добро пожаловать, {{ user.username }} | <a href="{% url 'logout' %}">Выход</a></div>
+    {% endif %}
+    <meta charset="UTF-8">
+    <title>{%   block title    %} Мессенджер {%   endblock    %} </title>
+    {% block content %} CONTENT  {% endblock %}
+    <div style="margin:20px;"> <a href="{% url 'home' %}">Увидеть карту сайта</a></div>
+<address>
+    Автор: <a href="mailto:maldenser@yandex.ru">Денис Малышев</a>.<br>
+    maldenser@yandex.ru<br>
+    8-963-695-19-72
+</address>
+</head>
+<body>
+</body>
+</html>

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Авторизация :: {{ block.super }}
+{% endblock %}
+
+
+{% block content %}
+<h1>Авторизация</h1>
+
+            {% if messages %}
+
+            {% for message in messages %}
+
+                {% if message.tags == 'error' %}
+                    <br><span style='color:red'> {{ message }} </span>
+                {% endif %}
+
+            {% endfor %}
+
+            {% endif %}
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Авторизация</button>
+</form>
+
+<div style="margin:20px;"> <a href="{% url 'register' %}">Ещё не зарегистрированы? Зарегистрируйтесь!</a></div>
+
+{% endblock %}

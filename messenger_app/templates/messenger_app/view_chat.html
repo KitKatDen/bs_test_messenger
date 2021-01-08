@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Чат :: {{ block.super }}
+{% endblock %}
+
+{% block content %}
+
+{% if request.user.is_authenticated %}
+  <h1>Айоу</h1>
+<form action="{% url 'write_msg' %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Отправить</button>
+</form>
+<h2> {{ chat.title }} </h2>
+{% if msgs %}
+{% for msg in msgs %}
+<p><b>{{ msg.sender }}:</b></p> {{ msg.text }} <i>{{ msg.dt_sending }}</i> <br>
+{% endfor %}
+{% else %}
+<br>
+В этом чате нет ещё никаких сообщений
+{% endif %}
+    <div style="margin:20px;"> <a href="{% url 'home_mes' %}">Вернуться к чатам</a></div>
+{% else %}
+  Авторизуйтесь, чтобы видеть содержание страницы.
+{% endif %}
+
+
+{% endblock %}
